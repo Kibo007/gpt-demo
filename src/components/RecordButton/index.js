@@ -1,47 +1,22 @@
-import useSpeechToText from 'react-hook-speech-to-text';
-import { useEffect } from 'react';
+import { useSpeechRecognition } from 'react-speech-kit';
 import micIcon from './../../assets/mic.svg';
 
 export const RecordButton = ({ handleChange, handleSubmit }) => {
-  const {
-    error,
-    interimResult,
-    isRecording,
-    results,
-    startSpeechToText,
-    stopSpeechToText,
-    setResults,
-  } = useSpeechToText({
-    continuous: true,
-    useLegacyResults: false,
+  const { listen, listening, stop } = useSpeechRecognition({
+    onResult: (result) => {
+      handleChange(result);
+    },
+    onEnd: () => handleSubmit(),
   });
 
-  useEffect(() => {
-    if (interimResult || results.length) {
-      const prevText = results.reduce((acu, res) => {
-        const text = res.transcript;
-        return `${acu ? ` ${acu}` : ''} ${text}`;
-      }, '');
-
-      const text = `${prevText}${interimResult ? ` ${interimResult}` : ''}`;
-      debugger;
-      handleChange(text);
-    }
-  }, [interimResult, handleChange, results]);
-
-  useEffect(() => {
-    if (!isRecording && results.length > 0) {
-      setResults([]);
-      handleSubmit();
-    }
-  }, [isRecording, setResults, handleSubmit, results]);
-
-  if (error) return <p>Web Speech API is not available in this browser 🤷‍</p>;
+  const handleListen = () => {
+    listen({ interimResults: true, lang: 'en-US', continuous: true });
+  };
 
   return (
-    <button onClick={isRecording ? stopSpeechToText : startSpeechToText}>
-      <span>{isRecording ? 'Stop Recording' : 'Start Recording'}</span>
-      <img data-recording={isRecording} src={micIcon} alt="" />
+    <button onClick={listening ? stop : handleListen}>
+      <span>{listening ? 'Stop Recording' : 'Start Recording'}</span>
+      <img data-recording={listening} src={micIcon} alt="" />
     </button>
   );
 };
