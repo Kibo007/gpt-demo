@@ -9,7 +9,7 @@ const { Configuration, OpenAIApi } = Openai;
 const app = express();
 
 const configuration = new Configuration({
-  organization: 'org-YPbLcjMBXnzdBm1gc2eOaFmk',
+  organization: process.env.OPENAI_ORGANISATION,
   apiKey: process.env.OPENAI_API_KEY,
 });
 const openai = new OpenAIApi(configuration);
@@ -22,7 +22,7 @@ app.post('/api', async (req, res) => {
   const response = await openai.createCompletion({
     model: 'text-davinci-003',
     prompt: message,
-    max_tokens: 1000,
+    max_tokens: 4000,
     temperature: 0,
   });
 

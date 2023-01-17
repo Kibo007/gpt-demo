@@ -1,0 +1,8 @@
+.responseContainer {
+    background-color: black;
+    height: 50vh;
+    width: 100%;
+    color: green;
+    font-size: 19px;
+    padding: 20px
+}
