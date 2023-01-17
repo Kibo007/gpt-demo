@@ -1,7 +1,7 @@
 import { useSpeechRecognition } from 'react-speech-kit';
 import micIcon from './../../assets/mic.svg';
 
-export const RecordButton = ({ handleChange, handleSubmit }) => {
+export const RecordButton = ({ handleChange, handleSubmit, lang }) => {
   const { listen, listening, stop } = useSpeechRecognition({
     onResult: (result) => {
       handleChange(result);
@@ -10,7 +10,7 @@ export const RecordButton = ({ handleChange, handleSubmit }) => {
   });
 
   const handleListen = () => {
-    listen({ interimResults: true, lang: 'en-US', continuous: true });
+    listen({ interimResults: true, lang, continuous: true });
   };
 
   return (
