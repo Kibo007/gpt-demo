@@ -1,16 +1,12 @@
 import React, { useState } from 'react';
+import { SpeachToText } from './components/SpeachToText';
 import './App.css';
 
 const App = () => {
   const [message, setMessage] = useState('');
   const [response, setResponse] = useState('');
 
-  const handleChange = (e) => {
-    setMessage(e.target.value);
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
     const res = await fetch('http://localhost:3001/api', {
       method: 'POST',
       body: JSON.stringify({ message }),
@@ -24,11 +20,9 @@ const App = () => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <textarea value={message} onChange={handleChange} />
-        <button type="submit">Submit</button>
-      </form>
       <div>{response && <p>{response}</p>}</div>
+
+      <SpeachToText handleChange={setMessage} handleSubmit={handleSubmit} />
     </div>
   );
 };
