@@ -23,6 +23,7 @@ export const LanguageSelector = ({ setLang, lang }) => {
     <div className={styles.languageSelector}>
       <label htmlFor="language">Language: </label>
       <select
+        className={styles.select}
         form="speech-recognition-form"
         id="language"
         value={lang}

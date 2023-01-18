@@ -3,7 +3,8 @@ import { RecordButton } from './components/RecordButton';
 import { SpeachText } from './components/SpeachText';
 import { ResponseAi } from './components/ResponseAi';
 import { LanguageSelector } from './components/LanguageSelector';
-import { Layout } from './components/Layout';
+import { SpeakButton } from './components/SpeakButton';
+import { Layout, Row } from './components/Layout';
 import './App.css';
 
 const App = () => {
@@ -25,11 +26,15 @@ const App = () => {
 
   return (
     <Layout>
-      <RecordButton
-        handleChange={setSpeachText}
-        handleSubmit={handleSubmit}
-        lang={lang}
-      />
+      <Row>
+        <RecordButton
+          handleChange={setSpeachText}
+          handleSubmit={handleSubmit}
+          lang={lang}
+        />
+        <SpeakButton text={response} lang={lang} />
+      </Row>
+
       <SpeachText speachText={speachText} />
       <ResponseAi response={response} />
       <LanguageSelector setLang={setLang} lang={lang} />
