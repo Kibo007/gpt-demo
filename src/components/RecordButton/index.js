@@ -1,3 +1,4 @@
+import { useEffect, useCallback } from 'react';
 import { useSpeechRecognition } from 'react-speech-kit';
 import micIcon from './../../assets/mic.svg';
 
@@ -9,9 +10,25 @@ export const RecordButton = ({ handleChange, handleSubmit, lang }) => {
     onEnd: () => handleSubmit(),
   });
 
-  const handleListen = () => {
+  const handleListen = useCallback(() => {
     listen({ interimResults: true, lang, continuous: true });
-  };
+  }, [lang, listen]);
+
+  const toggleListening = useCallback(
+    (event) => {
+      if (event.keyCode === 32) {
+        listening ? stop() : handleListen();
+      }
+    },
+    [listening, handleListen, stop]
+  );
+
+  useEffect(() => {
+    window.addEventListener('keydown', toggleListening);
+    return () => {
+      window.removeEventListener('keydown', toggleListening);
+    };
+  }, [toggleListening]);
 
   return (
     <button onClick={listening ? stop : handleListen}>
