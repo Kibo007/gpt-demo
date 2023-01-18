@@ -16,7 +16,7 @@ const App = () => {
   const handleSubmit = async () => {
     try {
       setIsResponseLoading(true);
-      const res = await fetch('http://localhost:3001/api', {
+      const res = await fetch('https://gpt-demo-seven.vercel.app/api', {
         method: 'POST',
         body: JSON.stringify({ message: speachText }),
         headers: {
