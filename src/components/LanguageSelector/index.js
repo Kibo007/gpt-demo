@@ -1,4 +1,5 @@
 import styles from './Layout.module.css';
+import PropTypes from 'prop-types';
 
 const languageOptions = [
   { label: 'Croatian', value: 'hr-HR' },
@@ -37,4 +38,9 @@ export const LanguageSelector = ({ setLang, lang }) => {
       </select>
     </div>
   );
+};
+
+LanguageSelector.propTypes = {
+  setLang: PropTypes.func.isRequired,
+  lang: PropTypes.string.isRequired,
 };

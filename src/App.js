@@ -11,17 +11,25 @@ const App = () => {
   const [speachText, setSpeachText] = useState('');
   const [response, setResponse] = useState('');
   const [lang, setLang] = useState('en-AU');
+  const [isResponseLoading, setIsResponseLoading] = useState(false);
 
   const handleSubmit = async () => {
-    const res = await fetch('http://localhost:3001/api', {
-      method: 'POST',
-      body: JSON.stringify({ message: speachText }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    const data = await res.json();
-    setResponse(data.message.text);
+    try {
+      setIsResponseLoading(true);
+      const res = await fetch('http://localhost:3001/api', {
+        method: 'POST',
+        body: JSON.stringify({ message: speachText }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const data = await res.json();
+      setIsResponseLoading(false);
+      setResponse(data.message.text);
+    } catch (error) {
+      setIsResponseLoading(false);
+      console.log(error);
+    }
   };
 
   return (
@@ -36,7 +44,7 @@ const App = () => {
       </Row>
 
       <SpeachText speachText={speachText} />
-      <ResponseAi response={response} />
+      <ResponseAi response={response} loading={isResponseLoading} />
       <LanguageSelector setLang={setLang} lang={lang} />
     </Layout>
   );

@@ -1,5 +1,6 @@
 import { useSpeechSynthesis } from 'react-speech-kit';
 import speakerIcon from './../../assets/speaker.svg';
+import PropTypes from 'prop-types';
 
 export const SpeakButton = ({ text, lang }) => {
   const { speak, cancel, speaking, voices } = useSpeechSynthesis();
@@ -16,4 +17,9 @@ export const SpeakButton = ({ text, lang }) => {
       <img data-recording={speaking} src={speakerIcon} alt="" />
     </button>
   );
+};
+
+SpeakButton.propTypes = {
+  text: PropTypes.string.isRequired,
+  lang: PropTypes.string.isRequired,
 };

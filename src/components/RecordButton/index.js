@@ -1,6 +1,7 @@
 import { useEffect, useCallback } from 'react';
 import { useSpeechRecognition } from 'react-speech-kit';
 import micIcon from './../../assets/mic.svg';
+import PropTypes from 'prop-types';
 
 export const RecordButton = ({ handleChange, handleSubmit, lang }) => {
   const { listen, listening, stop } = useSpeechRecognition({
@@ -36,4 +37,10 @@ export const RecordButton = ({ handleChange, handleSubmit, lang }) => {
       <img data-recording={listening} src={micIcon} alt="" />
     </button>
   );
+};
+
+RecordButton.propTypes = {
+  handleChange: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  lang: PropTypes.string.isRequired,
 };
