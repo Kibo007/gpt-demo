@@ -11,6 +11,7 @@ export const SpeakButton = ({ text, lang }) => {
 
     speak({ text, voice: voice || voices[0], rate: 1, pitch: 1.1 });
   };
+
   return (
     <button onClick={speaking ? cancel : handleSpeak}>
       <span>{speaking ? 'Stop reading' : 'Read AI response'}</span>

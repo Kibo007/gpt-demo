@@ -12,5 +12,5 @@ export const ResponseAi = ({ response, loading }) => {
 
 ResponseAi.propTypes = {
   response: PropTypes.string.isRequired,
-  loading: PropTypes.array.isRequired,
+  loading: PropTypes.bool.isRequired,
 };
