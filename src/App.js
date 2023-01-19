@@ -16,7 +16,7 @@ const App = () => {
   const handleSubmit = async () => {
     try {
       setIsResponseLoading(true);
-      const res = await fetch('https://gpt-demo-seven.vercel.app/api', {
+      const res = await fetch(process.env.REACT_APP_API_ROUTE, {
         method: 'POST',
         body: JSON.stringify({ message: speachText }),
         headers: {
