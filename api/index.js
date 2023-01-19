@@ -33,4 +33,10 @@ app.post('/api', async (req, res) => {
   }
 });
 
+app.get('/test', async (req, res) => {
+  res.json({
+    status: 'it is up and running',
+  });
+});
+
 module.exports = app;

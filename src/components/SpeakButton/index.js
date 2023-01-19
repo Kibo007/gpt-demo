@@ -13,7 +13,7 @@ export const SpeakButton = ({ text, lang }) => {
   };
   return (
     <button onClick={speaking ? cancel : handleSpeak}>
-      <span>{speaking ? 'Stop Speaking' : 'Start Speaking'}</span>
+      <span>{speaking ? 'Stop reading' : 'Read AI response'}</span>
       <img data-recording={speaking} src={speakerIcon} alt="" />
     </button>
   );
