@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { RecordButton } from './components/RecordButton';
+import { useSpeechRecognition } from 'react-speech-kit';
 import { SpeachText } from './components/SpeachText';
 import { ResponseAi } from './components/ResponseAi';
 import { LanguageSelector } from './components/LanguageSelector';
@@ -12,6 +13,7 @@ const App = () => {
   const [response, setResponse] = useState('');
   const [lang, setLang] = useState('en-AU');
   const [isResponseLoading, setIsResponseLoading] = useState(false);
+  const { supported } = useSpeechRecognition();
 
   const handleSubmit = async () => {
     try {
@@ -31,6 +33,17 @@ const App = () => {
       console.log(error);
     }
   };
+
+  if (!supported) {
+    return (
+      <Layout>
+        <p>
+          Oh no, it looks like your browser doesn&#39;t support Speech
+          Recognition. Please use desktop chrome for best user expirience!
+        </p>
+      </Layout>
+    );
+  }
 
   return (
     <Layout>
